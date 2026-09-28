@@ -1,0 +1,71 @@
+{
+  "type": "application",
+  "title": "Dashcam",
+  "version": "1.0.0",
+  "initialRoute": "/",
+  "routes": {
+    "/": "ui://pages/trips"
+  },
+  "theme": {
+    "mode": "dark",
+    "color": {
+      "primary": "#334155",
+      "onPrimary": "#ffffff",
+      "primaryContainer": "#e2e8f0",
+      "onPrimaryContainer": "#0f172a",
+      "surface": "#161c24",
+      "onSurface": "#e9eef4",
+      "surfaceContainerHighest": "#0d1218",
+      "onSurfaceVariant": "#8d9aa8",
+      "outline": "#232c37",
+      "outlineVariant": "#232c37",
+      "error": "#b3261e",
+      "onError": "#ffffff",
+      "warning": "#e0a33c",
+      "onWarning": "#ffffff",
+      "inverseSurface": "#e9eef4",
+      "inverseOnSurface": "#161c24"
+    },
+    "spacing": {
+      "xxs": 2,
+      "xs": 4,
+      "sm": 8,
+      "md": 16,
+      "lg": 24,
+      "xl": 32,
+      "2xl": 48
+    },
+    "shape": {
+      "none": 0,
+      "extraSmall": 4,
+      "small": 8,
+      "medium": 12,
+      "large": 16,
+      "extraLarge": 28,
+      "full": 999
+    },
+    "fonts": {
+      "JetBrainsMono": {
+        "source": "asset",
+        "family": "JetBrainsMono"
+      }
+    }
+  },
+  "state": {
+    "initial": {
+      "rows": [],
+      "tripCount": 0,
+      "km": "",
+      "events": 0,
+      "sensitivity": "",
+      "card": "",
+      "boundary": "",
+      "notice": ""
+    }
+  },
+  "onInit": {
+    "type": "tool",
+    "tool": "trips.list",
+    "params": {}
+  }
+}

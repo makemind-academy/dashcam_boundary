@@ -1,0 +1,448 @@
+{
+  "type": "page",
+  "metadata": {
+    "title": "Trips"
+  },
+  "onInit": {
+    "type": "tool",
+    "tool": "trips.list",
+    "params": {}
+  },
+  "state": {
+    "initial": {
+      "rows": [],
+      "tripCount": 0,
+      "km": "",
+      "events": 0,
+      "sensitivity": "",
+      "card": "",
+      "boundary": "",
+      "notice": ""
+    }
+  },
+  "content": {
+    "type": "container",
+    "decoration": {
+      "color": "{{theme.color.surfaceContainerHighest}}"
+    },
+    "child": {
+      "type": "linear",
+      "direction": "vertical",
+      "children": [
+        {
+          "type": "container",
+          "padding": {
+            "left": 22,
+            "right": 22,
+            "top": 20,
+            "bottom": 16
+          },
+          "decoration": {
+            "color": "{{theme.color.surface}}",
+            "border": {
+              "bottom": true,
+              "color": "{{theme.color.outline}}",
+              "width": 1
+            }
+          },
+          "child": {
+            "type": "linear",
+            "direction": "horizontal",
+            "crossAxisAlignment": "center",
+            "children": [
+              {
+                "type": "linear",
+                "direction": "vertical",
+                "children": [
+                  {
+                    "type": "text",
+                    "content": "CAM 1 · WINDSCREEN",
+                    "style": {
+                      "fontSize": 12,
+                      "color": "{{theme.color.onSurfaceVariant}}",
+                      "letterSpacing": 2.0
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "content": "Trips recorded",
+                    "style": {
+                      "fontSize": 21,
+                      "color": "{{theme.color.onSurface}}",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ],
+                "gap": 4
+              },
+              {
+                "type": "spacer"
+              },
+              {
+                "type": "linear",
+                "direction": "vertical",
+                "children": [
+                  {
+                    "type": "text",
+                    "content": "DRIVEN",
+                    "style": {
+                      "fontSize": 11,
+                      "color": "{{theme.color.onSurfaceVariant}}",
+                      "letterSpacing": 1.6
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "content": "{{km}}",
+                    "style": {
+                      "fontSize": 26,
+                      "color": "{{theme.color.onSurface}}",
+                      "fontFamily": "JetBrainsMono"
+                    }
+                  }
+                ],
+                "gap": 4,
+                "crossAxisAlignment": "end"
+              }
+            ]
+          }
+        },
+        {
+          "type": "container",
+          "padding": {
+            "left": 24,
+            "right": 24,
+            "top": 10,
+            "bottom": 4
+          },
+          "child": {
+            "type": "linear",
+            "direction": "horizontal",
+            "crossAxisAlignment": "center",
+            "children": [
+              {
+                "type": "button",
+                "label": "Sensitivity 3",
+                "variant": "outlined",
+                "onTap": {
+                  "type": "tool",
+                  "tool": "camera.set_sensitivity",
+                  "params": {
+                    "level": 3
+                  }
+                }
+              },
+              {
+                "type": "box",
+                "width": 10
+              },
+              {
+                "type": "button",
+                "label": "Sensitivity 9 (asked)",
+                "variant": "outlined",
+                "onTap": {
+                  "type": "tool",
+                  "tool": "camera.set_sensitivity",
+                  "params": {
+                    "level": 9
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "expanded",
+          "child": {
+            "type": "container",
+            "padding": {
+              "left": 22,
+              "right": 22,
+              "top": 16,
+              "bottom": 8
+            },
+            "child": {
+              "type": "container",
+              "padding": {
+                "all": 18
+              },
+              "decoration": {
+                "color": "{{theme.color.surface}}",
+                "borderRadius": 14,
+                "border": {
+                  "color": "{{theme.color.outline}}",
+                  "width": 1
+                }
+              },
+              "child": {
+                "type": "list",
+                "items": "{{rows}}",
+                "shrinkWrap": true,
+                "itemSpacing": 10,
+                "emptyMessage": "Nothing recorded on this card",
+                "itemTemplate": {
+                  "type": "linear",
+                  "direction": "horizontal",
+                  "crossAxisAlignment": "center",
+                  "children": [
+                    {
+                      "type": "container",
+                      "width": 64,
+                      "child": {
+                        "type": "text",
+                        "content": "{{item.when}}",
+                        "textAlign": "start",
+                        "style": {
+                          "fontSize": 14,
+                          "color": "{{theme.color.onSurfaceVariant}}",
+                          "textAlign": "start",
+                          "fontFamily": "JetBrainsMono"
+                        },
+                        "maxLines": 1
+                      },
+                      "alignment": "centerStart"
+                    },
+                    {
+                      "type": "box",
+                      "width": 0
+                    },
+                    {
+                      "type": "expanded",
+                      "child": {
+                        "type": "container",
+                        "padding": {
+                          "left": 16
+                        },
+                        "child": {
+                          "type": "text",
+                          "content": "{{item.line}}",
+                          "style": {
+                            "fontSize": 16,
+                            "color": "{{theme.color.onSurface}}"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "box",
+                      "width": 0
+                    },
+                    {
+                      "type": "container",
+                      "width": 110,
+                      "child": {
+                        "type": "text",
+                        "content": "{{item.clip}}",
+                        "textAlign": "end",
+                        "style": {
+                          "fontSize": 13,
+                          "color": "{{theme.color.onSurfaceVariant}}",
+                          "textAlign": "end",
+                          "fontFamily": "JetBrainsMono"
+                        },
+                        "maxLines": 1
+                      },
+                      "alignment": "centerEnd"
+                    },
+                    {
+                      "type": "box",
+                      "width": 0
+                    },
+                    {
+                      "type": "container",
+                      "width": 90,
+                      "child": {
+                        "type": "text",
+                        "content": "{{item.events}}",
+                        "textAlign": "end",
+                        "style": {
+                          "fontSize": 13,
+                          "color": "{{theme.color.warning}}",
+                          "textAlign": "end",
+                          "fontFamily": "JetBrainsMono"
+                        },
+                        "maxLines": 1
+                      },
+                      "alignment": "centerEnd"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "container",
+          "padding": {
+            "left": 22,
+            "right": 22,
+            "top": 0,
+            "bottom": 8
+          },
+          "child": {
+            "type": "container",
+            "padding": {
+              "all": 18
+            },
+            "decoration": {
+              "color": "{{theme.color.surface}}",
+              "borderRadius": 14,
+              "border": {
+                "color": "{{theme.color.outline}}",
+                "width": 1
+              }
+            },
+            "child": {
+              "type": "linear",
+              "direction": "horizontal",
+              "crossAxisAlignment": "center",
+              "children": [
+                {
+                  "type": "linear",
+                  "direction": "vertical",
+                  "children": [
+                    {
+                      "type": "text",
+                      "content": "TRIPS",
+                      "style": {
+                        "fontSize": 11,
+                        "color": "{{theme.color.onSurfaceVariant}}",
+                        "letterSpacing": 1.6
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "content": "{{tripCount}}",
+                      "style": {
+                        "fontSize": 18,
+                        "color": "{{theme.color.onSurface}}",
+                        "fontFamily": "JetBrainsMono"
+                      }
+                    }
+                  ],
+                  "gap": 4
+                },
+                {
+                  "type": "container",
+                  "padding": {
+                    "left": 32,
+                    "right": 0,
+                    "top": 0,
+                    "bottom": 0
+                  },
+                  "child": {
+                    "type": "linear",
+                    "direction": "vertical",
+                    "children": [
+                      {
+                        "type": "text",
+                        "content": "IMPACTS",
+                        "style": {
+                          "fontSize": 11,
+                          "color": "{{theme.color.onSurfaceVariant}}",
+                          "letterSpacing": 1.6
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "content": "{{events}}",
+                        "style": {
+                          "fontSize": 18,
+                          "color": "{{theme.color.warning}}",
+                          "fontFamily": "JetBrainsMono"
+                        }
+                      }
+                    ],
+                    "gap": 4
+                  }
+                },
+                {
+                  "type": "container",
+                  "padding": {
+                    "left": 32,
+                    "right": 0,
+                    "top": 0,
+                    "bottom": 0
+                  },
+                  "child": {
+                    "type": "linear",
+                    "direction": "vertical",
+                    "children": [
+                      {
+                        "type": "text",
+                        "content": "SENSITIVITY",
+                        "style": {
+                          "fontSize": 11,
+                          "color": "{{theme.color.onSurfaceVariant}}",
+                          "letterSpacing": 1.6
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "content": "{{sensitivity}}",
+                        "style": {
+                          "fontSize": 18,
+                          "color": "{{theme.color.onSurface}}",
+                          "fontFamily": "JetBrainsMono"
+                        }
+                      }
+                    ],
+                    "gap": 4
+                  }
+                },
+                {
+                  "type": "spacer"
+                },
+                {
+                  "type": "text",
+                  "content": "{{card}}",
+                  "style": {
+                    "fontSize": 14,
+                    "color": "{{theme.color.onSurfaceVariant}}",
+                    "fontFamily": "JetBrainsMono"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "container",
+          "padding": {
+            "left": 22,
+            "right": 22,
+            "top": 4,
+            "bottom": 18
+          },
+          "child": {
+            "type": "linear",
+            "direction": "horizontal",
+            "crossAxisAlignment": "center",
+            "children": [
+              {
+                "type": "expanded",
+                "child": {
+                  "type": "text",
+                  "content": "{{boundary}}",
+                  "style": {
+                    "fontSize": 13,
+                    "color": "{{theme.color.onSurfaceVariant}}"
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "content": "{{notice}}",
+                "style": {
+                  "fontSize": 13,
+                  "color": "{{theme.color.primary}}"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "crossAxisAlignment": "stretch"
+    }
+  }
+}
